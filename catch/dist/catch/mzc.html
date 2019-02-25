@@ -1,0 +1,55 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><title>我抓娃娃机</title><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui,viewport-fit=cover"><meta content=yes name=apple-mobile-web-app-capable><meta name=apple-mobile-web-app-status-bar-style content=black-translucent><meta content=black name=apple-mobile-web-app-status-bar-style><meta name=format-detection content="telephone=no"><meta name=full-screen content=yes><meta name=x5-fullscreen content=true><meta http-equiv=Pragma content=no-cache><meta http-equiv=Cache-control content=no-cache><meta http-equiv=Cache content=no-cache><script async src=//g.alicdn.com/fdilab/lib3rd/viewport-units-buggyfill/0.6.2/??viewport-units-buggyfill.hacks.min.js,viewport-units-buggyfill.min.js></script><script>if(!localStorage.getItem('startTime2')){
+      localStorage.setItem('startTime2',performance.timing.navigationStart);
+    }else {
+      localStorage.setItem('auto','true');
+    }
+
+    if(!localStorage.getItem('log_id')){
+      ajax('api/time', getParamByName('machine') || 'CATCH_100024', function (res) {
+        var data = JSON.parse(res);
+        localStorage.setItem('log_id', data.data.log_id);
+      });
+    }
+
+    function ajax(url, machine_no, callback) {
+      var baseUrl = document.URL.indexOf('catchme') !== -1 ? 'https://front.catchme.com.cn/' : 'https://front.5zhua.cn/'
+      var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+      xmlhttp.open("POST", baseUrl + url, true);
+      xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+          callback(xmlhttp.response);
+        }
+      }
+      xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xmlhttp.send("machine_no=" + machine_no);
+    }
+
+    function getParamByName(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i")
+      var r = window.location.search.substr(1).match(reg)
+      if (r != null) return unescape(r[2]);
+      return null
+    }
+
+    window.onload = function () {
+      var domTime = Date.now() - (localStorage.getItem('startTime2') ? localStorage.getItem('startTime2') : performance.timing.navigationStart);
+      localStorage.setItem('domTime',domTime);
+
+      window.viewportUnitsBuggyfill.init({ hacks: window.viewportUnitsBuggyfillHacks });
+      var _hmt = _hmt || [];
+      if(document.URL.indexOf('zhua') != -1){
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?4180076f529852e8ccd0244deeefa5ed";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }else {
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?56522d6e6066a672bcbbc7b9bb525487";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    }</script><link href=./mzc/css/app.7467079c22b966ed82255b836ffbe119.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=./mzc/js/manifest.af45faffc4f8ae1423ac.js></script><script type=text/javascript src=./mzc/js/vendor.c64c8eec08e680820204.js></script><script type=text/javascript src=./mzc/js/app.69623144daa936b6a81f.js></script></body></html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<a href="http://front.5zhua.cn/legaogame
+">测试</a>
+<a href="test.html">ddddd</a>
+<button class="btn">跳转</button>
+</body>
+<script>
+  var clientWidth = window.innerWidth
+    || document.documentElement.clientWidth
+    || document.body.clientWidth;
+  console.log(navigator.userAgent)
+  var u = navigator.userAgent
+  var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+  var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+  if (isAndroid) {
+    alert("安卓机！")
+  }
+  if (isIOS) {
+    alert("苹果果机！")
+  }
+  console.log(clientWidth)
+  var btn = document.querySelector('.btn')
+  btn.onclick = function () {
+    alert('111')
+    window.location.replace('http://www.5zhua.cn/test3.html')
+  }
+  console.log(window.history.length)
+</script>
+</html>

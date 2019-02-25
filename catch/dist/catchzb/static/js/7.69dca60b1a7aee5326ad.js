@@ -1,0 +1,2 @@
+webpackJsonp([7],{K31e:function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var i={render:function(){this.$createElement;this._self._c;return this._m(0)},staticRenderFns:[function(){var t=this.$createElement,e=this._self._c||t;return e("div",{staticClass:"login"},[e("button",[this._v("微信授权")])])}]};var s=n("8AGX")({name:"login"},i,!1,function(t){n("u71Q")},"data-v-b36aab18",null);e.default=s.exports},u71Q:function(t,e){}});
+//# sourceMappingURL=7.69dca60b1a7aee5326ad.js.map

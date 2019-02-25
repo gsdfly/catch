@@ -1,0 +1,132 @@
+<!--<!doctype html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+  <!--<meta charset="UTF8">-->
+  <!--<meta name="viewport"-->
+        <!--content="width=devicewidth, userscalable=no, initialscale=1.0, maximumscale=1.0, minimumscale=1.0">-->
+  <!--<meta httpequiv="XUACompatible" content="ie=edge">-->
+  <!--<title>Document</title>-->
+<!--</head>-->
+<!--<body>-->
+  <!--<button id="openApp">打开贴吧</button>-->
+<!--</body>-->
+
+<!--<script>-->
+  <!--document.getElementById('openApp').onclick = function (e) {-->
+    <!--if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {-->
+      <!--window.location.href = "com.baidu.tieba://";//ios app协议18-->
+      <!--window.setTimeout(function () {-->
+        <!--window.location.href = "https://itunes.apple.com/cn/app/id477927812";-->
+      <!--}, 2000)-->
+    <!--}-->
+    <!--if (navigator.userAgent.match(/android/i)) {-->
+      <!--window.location.href = "tmall://";//android app协议25-->
+      <!--window.setTimeout(function () {-->
+        <!--window.location.href = 'wechat://﻿'-->
+         <!--}, 2000)-->
+    <!--}-->
+  <!--}-->
+    <!--;-->
+<!--</script>-->
+<!--</html>-->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF8">
+  <title>Title</title>
+</head>
+<body>
+<div class="ring">
+  <div class="d">
+    <div class="dd">
+
+      <h1>打开指定app</h1>
+      <a class="btn J_demo">执行</a>
+      <a  href="weixin://" >微信</a>
+      <a href="sinaweibo://">微博</a>
+      <a href="taobao://m.taobao.com/">淘宝3</a>
+      <a href="taobao://item.taobao.com/item.html?id=41700658839">淘宝</a>
+      <a href="taobao://item.taobao.com/index.html">淘宝2</a>
+      <a href="tmall://com.tmall.wireless">天猫1</a>
+      <a href="tmall://tmallclient/">天猫2</a>
+      <a href="tmall://tmallclient/item.html?id=36615660686">天猫3</a>
+      <a href='tmall://tmallclient/?https://detail.tmall.com'>天猫4</a>
+      <a href='tmall://tmallclient/?https://m.tmall.com'>天猫41</a>
+      <a href='https://detail.tmall.com/item.htm?spm=a1z10.4b.w500214033206718.8.VCzX2C&id=529147672534&scene=taobao_shop'>天猫42</a>
+      <a href='tmall://tmallclient/?{"action":”item:id=36615660686”}'>天猫43</a>
+      <a href='tmall://page.tm/search?q=1234'>天猫44</a>
+      <a href='tmall://page.tm/index'>天猫45</a>
+      <a href='tmall://page.tm/home'>天猫46</a>
+      <a href='tmall://page.tm/'>天猫47</a>
+
+
+      <a href="tmall://tmallclient/m.tmall.com/" >天猫5</a>
+      <a href="tmall://tmallclient.com/">天猫6</a>
+      <a href="alipays://">支付宝</a>
+      <a href="mqq://">QQ</a>
+      <h1 onclick="tb()">淘宝</h1>
+      <h1 onclick="tb1()">天猫</h1>
+      <h1 onclick="tb2()">QQ</h1>
+
+
+      <h1 onclick="taobao()">淘宝1</h1>
+      <h1 onclick="tmall()">天猫1</h1>
+      <h1 onclick="taobao2()">淘宝2</h1>
+
+      <h1 onclick="tmall2()">天猫2</h1>
+
+    </div>
+  </div>
+</div>
+</body>
+<script src="https://gw.alipayobjects.com/as/g/h5-lib/alipayjsapi/3.1.1/alipayjsapi.min.js"></script>
+<script>
+//  @"tmall://page.tm/shop?shopId=148979681",  (店铺id)    @"tmall://tmallclient/?{\"action\":\"item:id=546778594967\"",  (商品id)    @"taobao://shop.m.taobao.com/shop/shop_index.htm?shop_id=111299932",    @"taobao://item.taobao.com/item.htm?id=563553523391",
+
+  console.log(window.history.length)
+  function tb() {
+    window.location.href ='taobao://'
+  }
+  function tb1() {
+    window.location.href ='tmall://tmallclient/'
+  }
+  function tb2() {
+    window.location.href ='mqq://'
+  }
+
+  function ready(callback) {
+    // 如果jsbridge已经注入则直接调用
+    if (window.AlipayJSBridge) {
+      callback && callback();
+    } else {
+      // 如果没有注入则监听注入的事件
+      document.addEventListener('AlipayJSBridgeReady', callback, false);
+    }
+  }
+
+  function tmall() {
+    ap.call('pushWindow', {
+      url: 'tmall://page.tm/search?q=1234',
+    });
+  }
+  function tmall2() {
+    location.href = 'tmall://tmallclient/?{"action":”item:id=36615660686”}';
+    //    AlipayJSBridge.call('pushWindow', {
+    //      url: 'tmall://tmallclient/?{"action":”item:id=36615660686”}',
+    //    });
+  }
+
+  function taobao() {
+    AlipayJSBridge.call('pushWindow', {
+//      url:'tmall://page.tm/search?q=1234'
+      url: 'taobao://m.taobao.com/',
+//      url: 'tmall://tmallclient/?{"action":”item:id=36615660686”}',
+    });
+  }
+function taobao2() {
+  ap.call('pushWindow', {
+    url: 'taobao://m.taobao.com/',
+  });
+}
+</script>
+</html>

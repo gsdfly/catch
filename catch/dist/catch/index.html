@@ -1,0 +1,160 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><title></title><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui,viewport-fit=cover"><meta content=yes name=apple-mobile-web-app-capable><meta name=apple-mobile-web-app-status-bar-style content=black-translucent><meta content=black name=apple-mobile-web-app-status-bar-style><meta name=format-detection content="telephone=no"><meta name=full-screen content=yes><meta name=x5-fullscreen content=true><meta http-equiv=Pragma content=no-cache><meta http-equiv=Cache-control content=no-cache><meta http-equiv=Cache content=no-cache><script async src=//g.alicdn.com/fdilab/lib3rd/viewport-units-buggyfill/0.6.2/??viewport-units-buggyfill.hacks.min.js,viewport-units-buggyfill.min.js></script><script>//    getParamByName('machine')
+    var arr = ['CATCH_101087','CATCH_101092','CATCH_101097','CATCH_100984','CATCH_100580']
+    var arr2 = ['CATCH_100295','CATCH_100333','CATCH_100368']
+        arr2 = []
+//    var isgzh = getParamByName('isgzh');
+//    localStorage.setItem('machine','CATCH_100024')
+//    if(isgzh){
+//      var machine = localStorage.getItem('machine');
+//      if(machine){
+//        //改变url
+//        localStorage.setItem('isgzh',isgzh)
+//        var index = window.location.href.indexOf('?');
+//        var baseUrl = window.location.href.slice(0,index+1);
+//        var newUrl = baseUrl+'machine='+machine;
+//        window.history.pushState({},'',newUrl);
+//      }else {
+//        //直接跳转到公众号的提示页面
+//      }
+//    }
+
+  if(['CATCH_100648','CATCH_100690'].includes(getParamByName('machine'))){
+    document.title = '有戏机';
+  }else {
+    document.title = '我抓娃娃机';
+  }
+
+//    if((!(IsWeixinOrAlipay() !== 'Alipay' && arr.includes(getParamByName('machine')))) || !arr2.includes(getParamByName('machine'))){
+if(!(IsWeixinOrAlipay() !== 'Alipay' && (arr.includes(getParamByName('machine')) || arr2.includes(getParamByName('machine'))))){
+      var re = getParamByName('re')
+      if(re){
+        localStorage.setItem('re',re)
+      }
+      if (GetCookie('token_')) {
+        //发送一个请求
+        //得到此时浏览器访问改地址的时间-存储的第一次浏览器访问改地址的时间=授权的时间
+//      var startTime = localStorage.getItem('startTime');
+//      if (startTime) {
+//        //当我时间上报之后，需要清除所有时间。
+//        localStorage.removeItem('startTime');
+//        var warrantTime = performance.timing.navigationStart - startTime;//授权时间
+//        localStorage.setItem('startTime2', startTime);
+//        localStorage.setItem('warrantTime', warrantTime);
+//      } else {
+        //发送请求
+        ajax('api/time', getParamByName('machine') || 'CATCH_100024', function (res) {
+          var data = JSON.parse(res);
+          localStorage.setItem('log_id', data.data.log_id);
+        });
+        localStorage.setItem('startTime2', performance.timing.navigationStart);
+//      }
+      }
+      else {
+        //存储第一次浏览器访问改地址的时间,同时需要加上是否使用
+        //发送请求
+//      var token = getParamByName('token');
+        var auth_type = getParamByName('auth_type') || localStorage.getItem('auth_type');
+        if (!auth_type) {
+          var url = document.URL.indexOf('catchme') !== -1 ? 'http://front.catchme.com.cn/' : 'http://front.5zhua.cn/'
+          ajax('api/time', getParamByName('machine') || 'CATCH_100024', function (res) {
+            var data = JSON.parse(res);
+            localStorage.setItem('log_id', data.data.log_id);
+          });
+          localStorage.setItem('startTime', performance.timing.navigationStart);
+          var ua = IsWeixinOrAlipay()
+          if (ua === 'Alipay') {
+            window.location.href = url+'v2/alipay/oauth?callback='+document.URL
+          }
+          else if(ua === 'taobao')
+          {
+            window.location.href = url+'v2/taobao/oauth?callback='+document.URL
+          }
+          else {
+            window.location.href = url+'v2/wechat/oauth_scope?callback='+document.URL
+          }
+        }else {
+          var startTime = localStorage.getItem('startTime');
+          if (startTime) {
+            //当我时间上报之后，需要清除所有时间。
+            localStorage.removeItem('startTime');
+            var warrantTime = performance.timing.navigationStart - startTime;//授权时间
+            localStorage.setItem('startTime2', startTime);
+            localStorage.setItem('warrantTime', warrantTime);
+            //将auth_id和auth_type存到本地存储中
+            var auth_id = getParamByName('auth_id');
+            localStorage.setItem('auth_type',auth_type);
+            localStorage.setItem('auth_id',auth_id);
+            //改变url
+//            var index = window.location.href.indexOf('&');
+//            var newUrl = window.location.href.slice(0,index);
+//            window.history.pushState({},'',newUrl);
+          }else {
+            localStorage.setItem('startTime2', performance.timing.navigationStart);
+          }
+        }
+      }
+    }
+
+    function IsWeixinOrAlipay() {
+      var ua = window.navigator.userAgent.toLowerCase()
+      //判断是不是微信
+      if (ua.match(/MicroMessenger/i) == 'micromessenger') return "WeiXin"
+      //判断是不是支付宝
+      if (ua.match(/AlipayClient/i) == 'alipayclient') return "Alipay"
+
+      if (ua.match(/taobao/i) == 'taobao') return "taobao"
+      //哪个都不是
+      return "false"
+    }
+
+    function GetCookie(name) {
+      var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+      if (arr = document.cookie.match(reg)) {
+        return unescape(arr[2])
+      } else {
+        return null
+      }
+    }
+
+    function getParamByName(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i")
+      var r = window.location.search.substr(1).match(reg)
+      if (r != null) return unescape(r[2]);
+      return null
+    }
+
+    function ajax(url, machine_no, callback) {
+      var baseUrl = document.URL.indexOf('catchme') !== -1 ? 'http://front.catchme.com.cn/' : 'http://front.5zhua.cn/'
+      var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+      xmlhttp.open("POST", baseUrl + url, true);
+      xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+          callback(xmlhttp.response);
+        }
+      }
+      xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xmlhttp.send("machine_no=" + machine_no);
+    }
+
+    window.onload = function () {
+      var domTime = Date.now() - (localStorage.getItem('startTime2') ? localStorage.getItem('startTime2') : performance.timing.navigationStart);
+      localStorage.setItem('domTime', domTime);
+      window.viewportUnitsBuggyfill.init({hacks: window.viewportUnitsBuggyfillHacks});
+
+      var _hmt = _hmt || [];
+      if (document.URL.indexOf('5zhua') != -1) {
+        (function () {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?4180076f529852e8ccd0244deeefa5ed";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      } else {
+        (function () {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?56522d6e6066a672bcbbc7b9bb525487";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    }</script><link href=./static/css/app.173b00b357446445e279a2fcba0e6ef5.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=./static/js/manifest.ad9660a47f53fb59002a.js></script><script type=text/javascript src=./static/js/vendor.a0edd5346524a168636a.js></script><script type=text/javascript src=./static/js/app.b614f417bd40ab0fc435.js></script></body></html>

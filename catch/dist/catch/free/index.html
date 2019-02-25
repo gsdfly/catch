@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我抓娃娃机</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <link rel="stylesheet" href="http://res.catchme.com.cn/web/activity/js/layer.css"/>
+    <script>
+      (function (doc, win) {
+        var clientWidth = win.innerWidth
+          || doc.documentElement.clientWidth
+          || doc.body.clientWidth;
+        var docEl = doc.documentElement;
+        var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+        var recalc = function () {
+          if (!clientWidth) return
+          docEl.style.fontSize = 100 * (clientWidth / 750) + 'px'
+        };
+
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false)
+        doc.addEventListener('DOMContentLoaded', recalc, false)
+      })(document, window)
+    </script>
+    <style type="text/css">
+      html, body, div,h1,h2,h3,h4,h5,h6 {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html, body {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+      .tip{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top:0;
+        visibility: hidden;
+      }
+      .tip .tip-bg{
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .tip2{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: url("http://res.catchme.com.cn/activity/free/bg_n.png") no-repeat;
+        background-size: 100% 100%;
+      }
+      .tip2 .tip2img1{
+        width: 5.9rem;
+        height: 1.4rem;
+        position: absolute;
+        left: 50%;
+        top: 0.5rem;
+        transform: translateX(-50%);
+      }
+      .tip2 .tip2img2{
+        width: 7.45rem;
+        height: 7.11rem;
+        position: absolute;
+        left: 50%;
+        top: 3.21rem;
+        transform: translateX(-50%);
+      }
+      .tip2 .tip2img3,.box .tip2img3{
+        width: 6.3rem;
+        height: 1.87rem;
+        position: absolute;
+        left: 50%;
+        bottom: 0.68rem;
+        transform: translateX(-50%);
+      }
+      .box .tip2img3{
+        bottom: 1.36rem;
+      }
+      .tip2 h3{
+        font-size: 0.42rem;
+        line-height: 0.42rem;
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        left: 50%;
+        top: 2.01rem;
+        transform: translateX(-50%);
+        color: #fff;
+        letter-spacing: 0.021rem;
+      }
+      .tip2 h3 .s1{
+        display: inline-block;
+        width: 0.72rem;
+        height: 0.7rem;
+        line-height: 0.62rem;
+        font-size: 0.6rem;
+        background: url("http://res.catchme.com.cn/activity/free/key.png") no-repeat;
+        background-size: 100% 100%;
+      }
+      .box .main{
+        width: 100%;
+        height: calc(100% - 2.9rem);
+        position: relative;
+      }
+      .box .main >div{
+        position: absolute;
+        left: 50%;
+        top:50%;
+        transform: translate(-50%,-50%);
+      }
+      .box {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: url("http://res.catchme.com.cn/activity/free/bg_n.png") no-repeat;
+        background-size: 100% 100%;
+        visibility: hidden;
+      }
+      .box>p{
+        font-size: 0.28rem;
+        color: rgba(255,255,255,0.9);
+        position: absolute;
+        bottom: 2.57rem;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        line-height: 0.4rem;
+      }
+
+      .box .main >div>img{
+        width: 4.7rem;
+        display: block;
+        margin:0 auto;
+      }
+      .box h3{
+        font-size: 0.32rem;
+        text-align: center;
+        color: #fff;
+        width: 100%;
+        margin: 0 0 1.12rem 0;
+        font-weight: normal;
+      }
+      .btn{
+        width: 3.6rem;
+        height: 0.7rem;
+        background-image: linear-gradient(0deg,
+        rgba(193, 193, 193, 0.65) 0%,
+        rgba(255, 255, 255, 0.65) 99%),
+        linear-gradient(
+          #ffffff,
+          #ffffff);
+        background-blend-mode: normal,
+        normal;
+        border-radius: 0.35rem;
+        position: absolute;
+        font-size: 0.32rem;
+        left: 50%;
+        bottom: 1.35rem;
+        transform: translateX(-50%);
+        display: block;
+        margin:0 auto;
+        outline: none;
+        color: #fd673b;
+      }
+      .high{
+        visibility: visible;
+      }
+    </style>
+</head>
+<body>
+  <div class="tip tip1">
+    <img class="tip-bg" src="http://res.catchme.com.cn/activity/free/follow.png" alt="">
+  </div>
+  <div class="tip tip2">
+    <img class="tip2img1" src="http://res.catchme.com.cn/activity/free/succeed.png" alt="">
+    <h3>恭喜您获得<span class="s1">2</span>个游戏币</h3>
+    <img class="tip2img2" src="http://res.catchme.com.cn/activity/free/mechine2.png" alt="">
+    <img class="tip2img3" src="http://res.catchme.com.cn/activity/free/step.png" alt="">
+  </div>
+  <div class="box">
+    <div class="main">
+      <div>
+        <h3>本月已领取，下个月再来领哦～</h3>
+        <img src="http://res.catchme.com.cn/activity/free/free_Received.png" alt="">
+      </div>
+    </div>
+    <img class="star" src="http://res.catchme.com.cn/activity/free/image_star.png" alt="">
+    <!--<button class="btn btn3" onclick="goWall()">去抓娃娃</button>-->
+    <img class="tip2img3" src="http://res.catchme.com.cn/activity/free/step.png" alt="">
+    <!--<p>使用方法：点击“去抓娃娃”按钮，<br/>关闭公众号对话框，投币开始游戏。</p>-->
+  </div>
+</body>
+<script type="text/javascript" src="http://res.catchme.com.cn/web/activity/js/unit.js"></script>
+<script type="text/javascript" src="http://res.catchme.com.cn/web/activity/js/layer.js"></script>
+<script>
+
+  var CONFIG = {
+    ua: IsWeixinOrAlipay(),
+    url: getUrl(),
+  }
+
+  callbackUrl(CONFIG);
+  //    配置jssdk
+  getJssdk(CONFIG);
+
+  var token = getParamByName('token') || GetCookie('token_');
+
+  var machine_obj = JSON.parse(localStorage.getItem('machine_obj'));
+
+  if(token){
+    ajax2({
+      url: CONFIG.url + 'api/wechat/subscribe',
+      method:"GET",
+      data:{token:token},
+      success:function (res) {
+        if(typeof res === 'string'){
+          res = JSON.parse(res)
+        }
+        if(res.data.subscribed){
+          var time;
+          if(machine_obj){
+           time = new Date().getTime() - machine_obj.time;
+          }else {
+            time = new Date().getTime()
+          }
+          //有url代表是从扫码页面跳转过来的
+          if(machine_obj && time <= 1000*60*60*6){
+            localStorage.setItem('isgzh',true);
+            window.location.href = machine_obj.url;
+          }else {
+            //这里帮助用户领取游戏币并显示让用户扫码，也有2种情况
+            var index = layer.open({type: 2});
+            ajax2({
+              url: CONFIG.url + 'api/free/order',
+//          url: 'http://front.5zhua.cn/api/free/order',
+              method: 'POST',
+              data: {
+                coin_price_id: document.URL.indexOf('catchme') !== -1 ? 104:17,
+                coupon_id: document.URL.indexOf('catchme') !== -1 ? 9:13,
+                machine_no: 'CATCH_199999',
+                token: token
+              },
+              success: function (response) {
+                layer.close(index);
+                if (typeof response === 'string') {
+                  response = JSON.parse(response);
+                }
+                if (response.status_code === 200) {
+                  var tip2 = document.querySelector('.tip2')
+                  tip2.className = 'tip tip2 high'
+                } else if (response.status_code === 1012) {
+                  var box = document.querySelector('.box');
+                  box.className = 'box high';
+                }
+              },
+              error: function (err) {
+                layer.close(index);
+                if(typeof err === 'string'){
+                  err = JSON.parse(err)
+                }
+                if(err.status_code === 429){
+                  layer.open({
+                    content: '访问过于频繁'
+                    , btn: '我知道了'
+                  });
+                  return;
+                }
+                layer.open({
+                  content: '网络出错，请重新扫描二维码'
+                  , btn: '我知道了'
+                });
+              }
+            })
+          }
+        }else {
+          tipHigh()
+        }
+      },
+      error:function () {
+        tipHigh()
+      }
+    })
+  }
+  function tipHigh() {
+    var tip1 = document.querySelector('.tip1');
+    var clientWidth = window.innerWidth
+      || document.documentElement.clientWidth
+      || document.body.clientWidth;
+    var clientHeight = window.innerHeight
+      || document.documentElement.clientHeight
+      || document.body.clientHeight;
+    if (clientWidth / clientHeight <= 0.6) {
+      var img = document.querySelector('.tip-bg')
+      img.src = 'http://res.catchme.com.cn/activity/free/follow_long.png'
+    }
+    tip1.className = 'tip tip1 high';
+  }
+
+  function goWall() {
+    wx.scanQRCode({
+      needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+      scanType: ["qrCode"], // 可以指定扫二维码还是一维码，默认二者都有
+      success: function (res) {
+        var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+        window.location.href = result
+      },
+      error: function () {
+        alert('扫码失败')
+      }
+    })
+  }
+
+</script>
+</html>

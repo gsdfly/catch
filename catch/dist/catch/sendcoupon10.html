@@ -1,0 +1,60 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><title></title><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui,viewport-fit=cover"><meta content=yes name=apple-mobile-web-app-capable><meta name=apple-mobile-web-app-status-bar-style content=black-translucent><meta content=black name=apple-mobile-web-app-status-bar-style><meta name=format-detection content="telephone=no"><meta name=full-screen content=yes><meta name=x5-fullscreen content=true><meta http-equiv=Pragma content=no-cache><meta http-equiv=Cache-control content=no-cache><meta http-equiv=expires content=0><meta http-equiv=expires content="Tue, 01 Jan 1980 1:00:00 GMT"><meta http-equiv=Cache content=no-cache><script async src=//g.alicdn.com/fdilab/lib3rd/viewport-units-buggyfill/0.6.2/??viewport-units-buggyfill.hacks.min.js,viewport-units-buggyfill.min.js></script><script>var machine = getParamByName('machine');
+    if(!localStorage.getItem('startTime2')){
+      localStorage.setItem('startTime2',performance.timing.navigationStart);
+    }else {
+      localStorage.setItem('auto','true');
+    }
+    if(['CATCH_100648','CATCH_100690'].includes(machine)){
+      document.title = '有戏机';
+    }else {
+      document.title = '我抓娃娃机';
+    }
+    if(!localStorage.getItem('log_id')){
+      ajax('api/time',machine || 'CATCH_100024', function (res) {
+        var data = JSON.parse(res);
+        localStorage.setItem('log_id', data.data.log_id);
+      });
+    }
+
+    function ajax(url, machine_no, callback) {
+      var baseUrl = document.URL.indexOf('catchme') !== -1 ? 'https://front.catchme.com.cn/' : 'https://front.5zhua.cn/'
+      var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+      xmlhttp.open("POST", baseUrl + url, true);
+      xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+          callback(xmlhttp.response);
+        }
+      }
+      xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xmlhttp.send("machine_no=" + machine_no);
+    }
+
+    function getParamByName(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i")
+      var r = window.location.search.substr(1).match(reg)
+      if (r != null) return unescape(r[2]);
+      return null
+    }
+
+    window.onload = function () {
+      var domTime = Date.now() - (localStorage.getItem('startTime2') ? localStorage.getItem('startTime2') : performance.timing.navigationStart);
+      localStorage.setItem('domTime',domTime);
+
+      window.viewportUnitsBuggyfill.init({ hacks: window.viewportUnitsBuggyfillHacks });
+      var _hmt = _hmt || [];
+      if(document.URL.indexOf('5zhua') != -1){
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?4180076f529852e8ccd0244deeefa5ed";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }else {
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?56522d6e6066a672bcbbc7b9bb525487";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    }</script><link href=http://res.catchme.com.cn/rc/1.0.4/sendcoupon10/css/app.e4c81c7f720af4c0b57ad38f73489d4f.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=http://res.catchme.com.cn/rc/1.0.4/sendcoupon10/js/manifest.4e6865e65d1db2bf1165.js></script><script type=text/javascript src=http://res.catchme.com.cn/rc/1.0.4/sendcoupon10/js/vendor.a9b91ba5a1bef4d48989.js></script><script type=text/javascript src=http://res.catchme.com.cn/rc/1.0.4/sendcoupon10/js/app.194989d7094b56ec85fe.js></script></body></html>

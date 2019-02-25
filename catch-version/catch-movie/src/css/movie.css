@@ -1,0 +1,14 @@
+.video-js{
+  background-color: transparent!important;
+}
+/*.video-js .vjs-big-play-button {*/
+  /*!**/
+   /*播放按钮换成圆形*/
+  /**!*/
+  /*height: 1.8em!important;*/
+  /*width: 1.8em!important;*/
+  /*line-height: 1.8em!important;*/
+  /*border-radius: 0.9em!important;*/
+  /*margin-left: -0.9em!important;*/
+  /*!*display: none!important;*!*/
+/*}*/

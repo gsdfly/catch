@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>我抓娃娃机</title>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta content="black" name="apple-mobile-web-app-status-bar-style">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="full-screen" content="yes">
+  <meta name="x5-fullscreen" content="true">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Cache-control" content="no-cache">
+  <meta http-equiv="Cache" content="no-cache">
+  <link rel="stylesheet" href="./../js/layer_mobile/need/layer.css"/>
+  <script>
+    (function (doc, win) {
+      var clientWidth = win.innerWidth
+        || doc.documentElement.clientWidth
+        || doc.body.clientWidth;
+      var docEl = doc.documentElement;
+      var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+      var recalc = function () {
+        if (!clientWidth) return
+        docEl.style.fontSize = 100 * (clientWidth / 750) + 'px'
+      };
+
+      if (!doc.addEventListener) return;
+      win.addEventListener(resizeEvt, recalc, false)
+      doc.addEventListener('DOMContentLoaded', recalc, false)
+    })(document, window)
+  </script>
+  <style type="text/css">
+    html, body, div {
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+    .box {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+    }
+    .box1 {
+      background: url("./../imgs/activity_bg1.png") no-repeat;
+      background-size: 100% 100%;
+      z-index: 3;
+    }
+    .box2 {
+      background: url("./../imgs/activity_bg2.png") no-repeat;
+      background-size: 100% 100%;
+      padding: 0.1px;
+    }
+    .box3 {
+      background: url("./../imgs/activity_bg3.png") no-repeat;
+      background-size: 100% 100%;
+      padding: 0.1px;
+    }
+    .btn {
+      width: 4.8rem;
+      height: 1.11rem;
+      background: url("./../imgs/activity_press_default.png") no-repeat;
+      background-size: 100% 100%;
+      position: absolute;
+      top: 72.5%;
+      left: 50%;
+      transform: translateX(-50%);
+      display: block;
+      margin: 0 auto;
+      border: none;
+      outline: none;
+    }
+    .box2 .btn {
+      background: url("./../imgs/activity_press_use_default.png") no-repeat;
+      background-size: 100% 100%;
+    }
+    .box2 p {
+      font-size: 0.26rem;
+      color: #fff;
+      position: absolute;
+      top: 37%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .box2 .num {
+      position: absolute;
+      color: #fff;
+      font-size: 0.4rem;
+      font-weight: 600;
+      left: 52%;
+      top: 53%;
+    }
+    .box3 .btn {
+      background: url("./../imgs/activity_press_go_default.png") no-repeat;
+      background-size: 100% 100%;
+    }
+    .high {
+      z-index: 9;
+    }
+  </style>
+</head>
+<body>
+<div class="box box1">
+  <button class="btn btn1"></button>
+</div>
+<div class="box box2">
+  <button class="btn btn2"></button>
+</div>
+<div class="box box3">
+  <button class="btn btn3"></button>
+</div>
+</body>
+<script type="text/javascript" src="./../js/unit.js"></script>
+<script type="text/javascript" src="./../js/layer_mobile/layer.js"></script>
+<script type="text/javascript">
+  window.onload = function () {
+    var CONFIG = {
+      ua: IsWeixinOrAlipay(),
+      url: getUrl()
+    }
+    //获取token
+//    callbackUrl(CONFIG);
+    //配置jssdk
+    getJssdk(CONFIG);
+
+    var flag = true;
+    var btn1 = document.querySelector('.btn1');
+    btn1.onclick = function () {
+      if (flag) {
+        btn1.style = "background:url(\"./../imgs/activity_press_down.png\") no-repeat;background-size: 100% 100%;";
+        var index = layer.open({type: 2});
+        ajax2({
+          url: CONFIG.url+'api/operation',
+          method: 'GET',
+            data: {site_id: getParamByName('place'),token:getParamByName('token') || GetCookie('token_')},
+          success: function (res) {
+            if (typeof res == 'string') {
+              res = JSON.parse(res);
+            }
+            if(res.status_code == 200){
+            var coupon_ids = [];
+            for (var i = 0; i < res.data.length; i++) {
+              coupon_ids.push(res.data[i].coupon.id);
+            }
+            ajax2({
+              url: CONFIG.url+'api/player/coupon/receive',
+              method: 'POST',
+              data:{coupon_ids:coupon_ids,token:getParamByName('token') || GetCookie('token_')},
+              success: function (response) {
+                if (typeof response == 'string') {
+                  response = JSON.parse(response);
+                }
+                __jp1(response);
+                layer.close(index);
+                flag = true;
+              },
+              error: function (err) {
+                layer.close(index);
+                layer.open({
+                  content: '网络出错，请重新扫描二维码'
+                  ,btn: '我知道了'
+                });
+                flag = true;
+              }
+            })
+          }else {
+              layer.close(index);
+              layer.open({
+                content: res.message
+                ,btn: '我知道了'
+              });
+            }
+          },
+          error: function (err) {
+            layer.close(index);
+            layer.open({
+              content: '网络出错，请重新扫描二维码'
+              ,btn: '我知道了'
+            });
+            flag = true;
+          }
+        });
+      }
+      flag = false;
+    };
+
+    var btn2 = document.querySelector('.btn2');
+    var btn3 = document.querySelector('.btn3');
+    btn2.onclick = function () {
+      btn2.style = "background:url(\"./../imgs/activity_press_use_down.png\") no-repeat;background-size: 100% 100%;";
+      code(CONFIG);
+    }
+    btn3.onclick = function () {
+      btn3.style = "background:url(\"./../imgs/activity_press_go_down.png\") no-repeat;background-size: 100% 100%;";
+      code(CONFIG);
+    }
+  }
+
+  function __jp1(res) {
+    if (res.status_code == 200) {
+      var box2 = document.querySelector('.box2');
+      box2.className = 'box box2 high'
+    } else if (res.status_code == 400) {
+        var box3 = document.querySelector('.box3');
+        box3.className = 'box box3 high'
+      }
+    else {
+      layer.open({
+        content: res.message
+        ,btn: '我知道了'
+      });
+    }
+  }
+
+</script>
+</html>

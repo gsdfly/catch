@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Title</title>
+</head>
+<body>
+<video id="byl_video"
+       style="object-fit:fill"
+       preload="auto"
+       playsinline="true"
+       webkit-playsinline="true"
+       x-webkit-airplay="allow"
+       airplay="allow"
+       x5-video-player-type="h5"
+       x5-video-player-fullscreen="true"
+       x5-video-orientation="portrait"
+       src="http://www.runoob.com/try/demo_source/mov_bbb.mp4"></video>
+<button onclick="player()">播放</button>
+</body>
+<script>
+  function player() {
+    var video = document.getElementById('byl_video');
+    video.play()
+  }
+
+//  document.addEventListener("WeixinJSBridgeReady", function() {
+//    video.play();
+//  }, false);
+
+</script>
+</html>

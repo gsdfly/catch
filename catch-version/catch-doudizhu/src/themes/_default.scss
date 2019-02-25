@@ -1,0 +1,100 @@
+$bgImgOrColor:url("http://res.catchme.com.cn/imgs-2017-12-29-20-42/bg2.png");//页面背景
+$userNameColor:#ffe7e0;     //用户名和机器号颜色
+$coinsBgColor:#fff2ee;      //用户币数和客服背景颜色
+$coinsColor:#fe5f5b;        //用户币数和客服字体颜色
+$coinsImg: url("./../assets/small/icon_portrait_bi.png") no-repeat; //金币背景
+
+$kefuTipColor:#353535;      //客服提示字体颜色
+$kefuPhoneColor:#576b95;    //客服电话字体颜色
+
+$taskUlImgOrColor:#fff;     //任务ul的背景
+$taskColor:#494949;         //任务下面字体颜色
+$toubiLingBg:url("./../assets/task-2/water.png") no-repeat; //投币领币任务完成背景
+$toubiBg:url("./../assets/task/b_bg.png"); //投币领币任务未完成背景
+$toubiColor:#fff;           //投币任务字体颜色
+
+
+$mainCenterImgOrColor:#fff; //中间的背景
+$saomaBg:#feedd7;           //扫码换机背景颜色
+$saomaColor:#fd643b;        //扫码换机字体颜色
+
+$startGameImg:url("http://res.catchme.com.cn/activity/ring/press_begin.png"); //开始游戏背景
+
+$addAndReduceColor:#ff784e;    //加币减币边框和字体的颜色
+$canPlayGameColor:#888888;    //可玩游戏次数颜色
+
+$tipColor:#7e7e7e;                //没币和开始游戏时的提示
+
+$ringImg:url("http://res.catchme.com.cn/activity/task2/process_bg.png");  //进度条的背景
+$ringCircleImg:url("./../assets/task-2/progress_doll_bg.png") no-repeat;  //进度条小球
+$ringWawaImg:url("./../assets/task-2/process_bg_circular.png");         //进度条上娃娃的背景
+
+$ringWawaTipBg:#f76058;       //娃娃提示的背景颜色
+$ringWawaTipColor:#fff;       //娃娃提示的字体颜色
+$ringWawaGoColor:#888;             //再抓几次娃娃的字体颜色
+$ringWawaBorder: 4px solid #e8453d; //完成任务娃娃边框
+
+
+$wxpayItemBorder:1px solid #fd643b;  //充值项边框
+$wxpayItemTopBg:#fff;                //充值项上面背景颜色
+$wxpayItemBottomBg:#fb643b;          //充值项下面背景颜色
+$wxpayItemTopColor:#353535;          //充值项上面字体颜色
+$wxpayItemBottomColor:#fff;          //充值项下面字体颜色
+$wxpayItemImg:none;                  //充值项背景图片
+
+
+//弹窗的
+//免费弹窗bg-center13
+$freePcolor:#353535;                //免费领币弹窗提示字体颜色
+$freeSpanColor:#de201b;             //免费领币弹窗回复字体颜色
+
+//投币送币和抓中送币bg-center15
+$gameBgImgOrColor:url("http://res.catchme.com.cn/activity/task2/window_bg.png") no-repeat; //任务弹窗的背景图片
+$gameWaterBg:#999999;   //水的背景颜色
+$gameWaterBorder:none;  //水的边框
+$gameWaterImg:url("./../assets/task/b_bg2.png") repeat-x;  //水流动的图片
+$gameNumColr:#fff;     //水中的文字颜色
+$gameButtonBgColor:linear-gradient(0deg, rgba(253, 102, 59, 0.65) 0%, rgba(254, 127, 66, 0.65) 100%),   linear-gradient(#fd663b, #fd663b);   //按钮背景颜色
+$gameButtonColor:#fff;                //按钮字体颜色
+$gameTipColor:#353535;                //弹窗文字提示颜色
+
+
+//解释娃娃弹出提示bg-center16
+$jieshiButtonImg:url("./../assets/guide/press_iknow.png"); //弹窗按钮背景图
+$jieshiButtonColor:#fd673b;   //按钮字体颜色
+$jieshiH3Color:#fff;   //弹窗h3标签文字颜色
+$jieshiPColor:#fff;    //弹窗p标签文字颜色
+
+$shuomingColor:#fff;  //说明文字颜色
+$shuomingBackColor:#fff;  //说明返回的文字颜色
+$shuomingBackIcon:url("./../assets/guide/icon_back.png") no-repeat;  //说明返回图标背景
+
+//优惠券列表弹窗bg-center12
+$couponListImgOrColor:#fd673b;                //优惠券列表弹窗的背景
+$couponImg:url("http://res.catchme.com.cn/activity/task2/ticket_bg.png") no-repeat;  //单个优惠券的背景
+
+//兑换券的弹窗bg-center11
+$receiveBiNumColor:#fef52e;            //用户已有的兑换值字体颜色
+$receivePColor:#fff;                   //兑换任务p字体颜色(包括，我的任务值、查看活动说明)
+$receiveGoCouponListColor:#fff;        //我的优惠券字体颜色
+
+//没有优惠券bg-center8
+$notCouponPColor:rgba(255, 255, 255, 0.5);    //没有优惠券字体的颜色
+
+//使用优惠券bg-center9
+$exchangeSpanH3Color:#fff;      //使用优惠券弹窗h3的字体颜色
+$exchangePColor:rgba(255, 255, 255, 0.7);  //使用优惠券弹窗的p的字体颜色
+$goCouponListColor:#fff;       //去我的优惠券的字体颜色
+
+//tipButton
+$tipButtonImg:linear-gradient(0deg, rgba(253, 102, 59, 0.65) 0%, rgba(254, 127, 66, 0.65) 100%),
+linear-gradient(#fe7940, #fe7940);  //tipButton的背景颜色
+$tipButtonColor:#fff;  //按钮字体颜色
+
+//dlCoupon
+$dlCouponH4Color:#fff;    //优惠券模块h4的字体颜色
+$dlCouponPColor:#fff;     //优惠券模块p的字体颜色
+
+//tipTitle
+$tipTitleBBgColor:#fd673b;  //标题B标签的背景颜色
+$tipTitleColor:#fff;  //标题的字体颜色

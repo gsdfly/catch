@@ -1,0 +1,16 @@
+var  handle = function (value) {
+    value = value.toFixed(2);
+    var index = value.indexOf('.');
+    if (index !== -1) {
+      var after = value.substring(index + 1);
+      if (after % 100 === 0) {
+        return value.substring(0, index);
+      } else if (after % 10 === 0) {
+        return value.substring(0, index + 2);
+      } else {
+        return value;
+      }
+    }
+  }
+module.exports.handleNum = handle
+
