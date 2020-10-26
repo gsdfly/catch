@@ -11,7 +11,7 @@ export default new Router({
   routes: [
     {
       name: 'index',
-      path: '/catch',
+      path: '/catch/*',
       component: CONFIG.isAlipayOpen ? r => require.ensure([], () => r(require('@/components/alipaytip'))) :  CONFIG.isTmallOpen ? r => require.ensure([], () => r(require('@/components/tmalltip'))) : index
       // component: index
       // component: r => require.ensure([], () => r(require('@/components/index2')))
